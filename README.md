@@ -1,10 +1,10 @@
 Vite is way faster than the CRA because Vite uses the ESbuild bundler while CRA uses Webpack which is slower than the ESbuild bundler.
 
-for hitting api i have added a custom hook useFetch which can provide isLOading, error, data state. Instead of writing it again and again.
+for hitting api I have added a custom hook useFetch which can provide isLOading, error, data state. Instead of writing it again and again.
 
-for pagination: this api is always providing null for before. so i have used after value in url on both left and right
+for pagination: we needed 2 values from api "before" and "after". but "before" value is always coming null. So I have used "after" value in url on both left and right, which means i am using same value on next and prev buttons
 
-i have used shadcn instead of MUI because:
+I have used shadcn instead of MUI because:
 
 1. it does not make project heavy as we only install what we need.
 2. using custom css on shadcn components is very easy whereas in mui if we write custom css classes sometimes we have to find exact classes where we can modify.
