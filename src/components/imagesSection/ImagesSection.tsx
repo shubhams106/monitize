@@ -3,38 +3,41 @@ import React, { useEffect, useState } from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import useFetch from "../hooks/useFetch";
 const ImagesSection = () => {
-  const [data, setData] = useState([]);
   const [Finaldata, setFinalData] = useState([]);
 
-  const fetchData = () => {
-    fetch("https://www.reddit.com/r/MostBeautiful.json?limit=8&after=1cmihmg")
-      .then((response) => response.json())
-      .then((d) => setData(d.data.children));
-  };
+  const [loadQuery, { response, loading, error }] = useFetch(
+    `MostBeautiful.json?limit=8&after=1cmihmg`,
+    {
+      method: "get",
+    }
+  );
 
   useEffect(() => {
-    fetchData();
+    loadQuery();
   }, []);
 
   useEffect(() => {
-    const tempArr = [];
-    for (let i = 0; i < data.length; i++) {
-      const obj = data[i].data;
-      tempArr.push({
-        title: obj.title,
-        url: obj.url,
-        id: obj.id,
-      });
+    if (response) {
+      const child = response?.data?.children;
+      const tempArr = [];
+      for (let i = 0; i < child.length; i++) {
+        const obj = child[i].data;
+        tempArr.push({
+          title: obj.title,
+          url: obj.url,
+          id: obj.id,
+        });
+      }
+      setFinalData(tempArr);
     }
-    setFinalData(tempArr);
-  }, [data]);
+  }, [response]);
+
   return (
     <div className="">
       <div className="h1-bold mb-32 text-center">ImagesSection</div>
@@ -42,13 +45,13 @@ const ImagesSection = () => {
         {Finaldata &&
           Finaldata.length > 0 &&
           Finaldata.map((item) => (
-            <div className="flex flex-col gap-4 max-w-[250px]">
+            <div className="flex flex-col gap-4 max-w-[250px]" key={item.url}>
               <img src={item.url} alt="url" className="h-[300px] w-[250px]" />
               <p className="line-clamp-2 mb-3">{item?.title}</p>
             </div>
           ))}
       </div>
-      <div className="">
+      <div className="mt-10">
         <Pagination>
           <PaginationContent>
             <PaginationItem>

@@ -13,7 +13,7 @@ const useFetch = (
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(undefined);
   const instance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: `https://www.reddit.com/r/`,
   });
   const loadQuery = async (data?: any, rest?: AxiosRequestConfig) => {
     const token = localStorage.getItem("token");
