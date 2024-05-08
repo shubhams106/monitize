@@ -4,6 +4,14 @@ import { ThemeProvider } from "./components/context/ThemeProvider";
 import ImagesSection from "./components/imagesSection/ImagesSection";
 
 function App() {
+  const a = () => {
+    fetch(
+      "https://www.reddit.com/r/MostBeautiful.json?limit=1&after=3tdvdb&count=2"
+    )
+      .then((response) => response.json())
+      .then((a) => console.log(a.data.children.map((a: any) => a.title)));
+  };
+  a();
   return (
     <>
       <ThemeProvider>
