@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+Vite is way faster than the CRA because Vite uses the ESbuild bundler while CRA uses Webpack which is slower than the ESbuild bundler.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+for hitting api i have added a custom hook useFetch which can provide isLOading, error, data state. Instead of writing it again and again.
 
-Currently, two official plugins are available:
+for pagination: this api is always providing null for before. so i have used after value in url on both left and right
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+i have used shadcn instead of MUI because:
 
-## Expanding the ESLint configuration
+1. it does not make project heavy as we only install what we need.
+2. using custom css on shadcn components is very easy whereas in mui if we write custom css classes sometimes we have to find exact classes where we can modify.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+for designing part i didn't knew exactly what to enhance so:
 
-- Configure the top-level `parserOptions` property like this:
+1. I added a navbar with dummy links.
+2. I added a theme functionality using context. depending upon dark or light theme i am changing text color and other relevant css.
+3. all the css is been added to index.css. so that we don't have to repeat. and required variables such as color, shadow has been added to tailwind.config.ts.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+For running the project
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. just clone the branch url i have shared.
+2. go inside the folder
+3. npm i
+4. npm run dev

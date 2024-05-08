@@ -10,14 +10,14 @@ import useFetch from "../hooks/useFetch";
 interface ImageData {
   title: string;
   url: string;
-  id: string;
 }
 
 const ImagesSection = () => {
   const [Finaldata, setFinalData] = useState<ImageData[]>([]);
+  const [apiAfterValue, setApiAfterValue] = useState<string>("");
 
-  const [loadQuery, { response, loading, error }] = useFetch(
-    `MostBeautiful.json?limit=8&after=1cmihmg`,
+  const [loadQuery, { response, loading }] = useFetch(
+    `MostBeautiful.json?limit=10&after=${apiAfterValue}`,
     {
       method: "get",
     }
@@ -29,6 +29,10 @@ const ImagesSection = () => {
 
   useEffect(() => {
     if (response) {
+      if (response?.data?.after) {
+        setApiAfterValue(response?.data?.after);
+      }
+
       const child = response?.data?.children;
       const tempArr = [];
       for (let i = 0; i < child.length; i++) {
@@ -36,12 +40,15 @@ const ImagesSection = () => {
         tempArr.push({
           title: obj.title,
           url: obj.url,
-          id: obj.id,
         });
       }
       setFinalData(tempArr);
     }
   }, [response]);
+
+  const paginate = () => {
+    loadQuery();
+  };
 
   return (
     <div className="">
@@ -61,12 +68,12 @@ const ImagesSection = () => {
         <div className="mt-10">
           <Pagination>
             <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
+              <PaginationItem className="cursor-pointer">
+                <PaginationPrevious onClick={paginate} />
               </PaginationItem>
 
-              <PaginationItem>
-                <PaginationNext href="#" />
+              <PaginationItem className="cursor-pointer">
+                <PaginationNext onClick={paginate} />
               </PaginationItem>
             </PaginationContent>
           </Pagination>
