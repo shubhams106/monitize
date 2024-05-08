@@ -4,14 +4,33 @@ import { ThemeProvider } from "./components/context/ThemeProvider";
 import ImagesSection from "./components/imagesSection/ImagesSection";
 
 function App() {
-  const a = () => {
-    fetch(
-      "https://www.reddit.com/r/MostBeautiful.json?limit=1&after=3tdvdb&count=2"
-    )
+  const [data, setData] = React.useState([]);
+  const [Finaldata, setFinalData] = React.useState([]);
+
+  const fetchData: any = () => {
+    fetch("https://www.reddit.com/r/MostBeautiful.json?limit=8&after=1cmihmg")
       .then((response) => response.json())
-      .then((a) => console.log(a.data.children.map((a: any) => a.title)));
+      .then((d) => setData(d.data.children));
   };
-  a();
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  React.useEffect(() => {
+    const tempArr = [];
+    for (let i = 0; i < data.length; i++) {
+      const obj = data[i].data;
+      tempArr.push({
+        title: obj.title,
+        url: obj.url,
+        id: obj.id,
+      });
+    }
+    setFinalData(tempArr);
+  }, [data]);
+  console.log({ Finaldata });
+
   return (
     <>
       <ThemeProvider>
