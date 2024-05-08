@@ -33,15 +33,6 @@ module.exports = {
           850: "#FDFDFD",
         },
       },
-
-      boxShadow: {
-        "light-300": "-10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
-        "dark-200": "2px 0px 20px 0px rgba(39, 36, 36, 0.04)",
-      },
-
-      screens: {
-        xs: "420px",
-      },
     },
   },
 };

@@ -91,33 +91,10 @@
     @apply text-light-400 dark:text-light-500 !important;
   }
 
-  .light-border {
-    @apply border-light-800 dark:border-dark-300;
-  }
-
   .h1-bold {
     @apply text-[30px] font-bold leading-[42px] tracking-tighter;
   }
 
-  .h3-bold {
-    @apply text-[20px] font-bold leading-[26px];
-  }
-
-  .h3-semibold {
-    @apply text-[20px] font-semibold leading-[24.8px];
-  }
-
-  .base-medium {
-    @apply text-[18px] font-medium leading-[25.2px];
-  }
-
-  .dark-gradient {
-    background: linear-gradient(
-      232deg,
-      rgba(23, 28, 35, 0.41) 0%,
-      rgba(19, 22, 28, 0.7) 100%
-    );
-  }
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -128,12 +105,5 @@
 
   .flex-start {
     @apply flex justify-start items-center;
-  }
-  .btn {
-    @apply bg-light-800 dark:bg-dark-300 !important;
-  }
-
-  .primary-gradient {
-    background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
   }
 }

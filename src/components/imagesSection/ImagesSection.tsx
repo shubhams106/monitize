@@ -1,4 +1,3 @@
-import { title } from "process";
 import React, { useEffect, useState } from "react";
 import {
   Pagination,
@@ -8,8 +7,14 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import useFetch from "../hooks/useFetch";
+interface ImageData {
+  title: string;
+  url: string;
+  id: string;
+}
+
 const ImagesSection = () => {
-  const [Finaldata, setFinalData] = useState([]);
+  const [Finaldata, setFinalData] = useState<ImageData[]>([]);
 
   const [loadQuery, { response, loading, error }] = useFetch(
     `MostBeautiful.json?limit=8&after=1cmihmg`,
@@ -41,6 +46,7 @@ const ImagesSection = () => {
   return (
     <div className="">
       <div className="h1-bold mb-32 text-center">ImagesSection</div>
+      {loading && <p className="text-center">Loading....... please wait</p>}
       <div className="flex gap-8 overflow-hidden flex-wrap">
         {Finaldata &&
           Finaldata.length > 0 &&
@@ -51,19 +57,21 @@ const ImagesSection = () => {
             </div>
           ))}
       </div>
-      <div className="mt-10">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
+      {!loading && (
+        <div className="mt-10">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
 
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      )}
     </div>
   );
 };
